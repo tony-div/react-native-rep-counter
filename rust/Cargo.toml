@@ -1,0 +1,15 @@
+[package]
+name = "rep_counter_core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "rep_counter_core"
+path = "src/lib.rs"
+crate-type = ["staticlib"]
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+opt-level = 3
+panic = "abort"
