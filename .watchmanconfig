@@ -1,0 +1,9 @@
+{
+  "ignore_dirs": [
+    "node_modules",
+    "android/build",
+    "ios/build",
+    "rust/target",
+    ".git"
+  ]
+}
