@@ -5,7 +5,7 @@ buildscript {
   }
 
   dependencies {
-    classpath "com.android.tools.build:gradle:9.1.0"
+    classpath "com.android.tools.build:gradle:9.2.1"
   }
 }
 
@@ -22,14 +22,6 @@ apply plugin: "com.android.library"
 apply plugin: 'org.jetbrains.kotlin.android'
 apply from: '../nitrogen/generated/android/NitroRepCounter+autolinking.gradle'
 apply from: "./fix-prefab.gradle"
-
-tasks.register("buildRustRelease", Exec) {
-  commandLine "bash", "$projectDir/build-rust-android.sh"
-}
-
-tasks.matching { it.name == "preBuild" }.configureEach {
-  dependsOn("buildRustRelease")
-}
 
 if (isNewArchitectureEnabled()) {
   apply plugin: "com.facebook.react"
@@ -80,23 +72,23 @@ android {
 
   packagingOptions {
     excludes = [
-      "META-INF",
-      "META-INF/**",
-      "**/libc++_shared.so",
-      "**/libNitroModules.so",
-      "**/libfbjni.so",
-      "**/libjsi.so",
-      "**/libfolly_json.so",
-      "**/libfolly_runtime.so",
-      "**/libglog.so",
-      "**/libhermes.so",
-      "**/libhermes-executor-debug.so",
-      "**/libhermes_executor.so",
-      "**/libreactnative.so",
-      "**/libreactnativejni.so",
-      "**/libturbomodulejsijni.so",
-      "**/libreact_nativemodule_core.so",
-      "**/libjscexecutor.so"
+            "META-INF",
+            "META-INF/**",
+            "**/libc++_shared.so",
+            "**/libNitroModules.so",
+            "**/libfbjni.so",
+            "**/libjsi.so",
+            "**/libfolly_json.so",
+            "**/libfolly_runtime.so",
+            "**/libglog.so",
+            "**/libhermes.so",
+            "**/libhermes-executor-debug.so",
+            "**/libhermes_executor.so",
+            "**/libreactnative.so",
+            "**/libreactnativejni.so",
+            "**/libturbomodulejsijni.so",
+            "**/libreact_nativemodule_core.so",
+            "**/libjscexecutor.so"
     ]
   }
 

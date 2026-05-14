@@ -1,26 +1,13 @@
 {
   "$schema": "https://nitro.margelo.com/nitro.schema.json",
-  "cxxNamespace": [
-    "repcounter"
-  ],
+  "cxxNamespace": ["repcounter"],
   "ios": {
     "iosModuleName": "NitroRepCounter"
   },
   "android": {
-    "androidNamespace": [
-      "repcounter"
-    ],
+    "androidNamespace": ["repcounter"],
     "androidCxxLibName": "NitroRepCounter"
   },
-  "autolinking": {
-    "RepCounter": {
-      "all": {
-        "language": "c++",
-        "implementationClassName": "HybridRepCounter"
-      }
-    }
-  },
-  "ignorePaths": [
-    "**/node_modules"
-  ]
+  "autolinking": {},
+  "ignorePaths": ["**/node_modules"]
 }

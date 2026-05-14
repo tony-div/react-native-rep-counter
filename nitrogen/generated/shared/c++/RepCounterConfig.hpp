@@ -30,6 +30,9 @@
 
 
 
+#include <NitroModules/Null.hpp>
+#include <string>
+#include <variant>
 #include <optional>
 
 namespace margelo::nitro::repcounter {
@@ -39,12 +42,11 @@ namespace margelo::nitro::repcounter {
    */
   struct RepCounterConfig final {
   public:
-    std::optional<double> upThresholdDeg     SWIFT_PRIVATE;
-    std::optional<double> downThresholdDeg     SWIFT_PRIVATE;
+    std::optional<std::variant<nitro::NullType, std::string>> exercise     SWIFT_PRIVATE;
 
   public:
     RepCounterConfig() = default;
-    explicit RepCounterConfig(std::optional<double> upThresholdDeg, std::optional<double> downThresholdDeg): upThresholdDeg(upThresholdDeg), downThresholdDeg(downThresholdDeg) {}
+    explicit RepCounterConfig(std::optional<std::variant<nitro::NullType, std::string>> exercise): exercise(exercise) {}
 
   public:
     friend bool operator==(const RepCounterConfig& lhs, const RepCounterConfig& rhs) = default;
@@ -60,14 +62,12 @@ namespace margelo::nitro {
     static inline margelo::nitro::repcounter::RepCounterConfig fromJSI(jsi::Runtime& runtime, const jsi::Value& arg) {
       jsi::Object obj = arg.asObject(runtime);
       return margelo::nitro::repcounter::RepCounterConfig(
-        JSIConverter<std::optional<double>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "upThresholdDeg"))),
-        JSIConverter<std::optional<double>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "downThresholdDeg")))
+        JSIConverter<std::optional<std::variant<nitro::NullType, std::string>>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "exercise")))
       );
     }
     static inline jsi::Value toJSI(jsi::Runtime& runtime, const margelo::nitro::repcounter::RepCounterConfig& arg) {
       jsi::Object obj(runtime);
-      obj.setProperty(runtime, PropNameIDCache::get(runtime, "upThresholdDeg"), JSIConverter<std::optional<double>>::toJSI(runtime, arg.upThresholdDeg));
-      obj.setProperty(runtime, PropNameIDCache::get(runtime, "downThresholdDeg"), JSIConverter<std::optional<double>>::toJSI(runtime, arg.downThresholdDeg));
+      obj.setProperty(runtime, PropNameIDCache::get(runtime, "exercise"), JSIConverter<std::optional<std::variant<nitro::NullType, std::string>>>::toJSI(runtime, arg.exercise));
       return obj;
     }
     static inline bool canConvert(jsi::Runtime& runtime, const jsi::Value& value) {
@@ -78,8 +78,7 @@ namespace margelo::nitro {
       if (!nitro::isPlainObject(runtime, obj)) {
         return false;
       }
-      if (!JSIConverter<std::optional<double>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "upThresholdDeg")))) return false;
-      if (!JSIConverter<std::optional<double>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "downThresholdDeg")))) return false;
+      if (!JSIConverter<std::optional<std::variant<nitro::NullType, std::string>>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "exercise")))) return false;
       return true;
     }
   };

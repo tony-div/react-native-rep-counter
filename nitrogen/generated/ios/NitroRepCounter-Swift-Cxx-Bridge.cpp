@@ -8,10 +8,26 @@
 #include "NitroRepCounter-Swift-Cxx-Bridge.hpp"
 
 // Include C++ implementation defined types
-
+#include "HybridHybridRepCounterSpecSwift.hpp"
+#include "NitroRepCounter-Swift-Cxx-Umbrella.hpp"
+#include <NitroModules/NitroDefines.hpp>
 
 namespace margelo::nitro::repcounter::bridge::swift {
 
-  
+  // pragma MARK: std::shared_ptr<HybridHybridRepCounterSpec>
+  std::shared_ptr<HybridHybridRepCounterSpec> create_std__shared_ptr_HybridHybridRepCounterSpec_(void* NON_NULL swiftUnsafePointer) noexcept {
+    NitroRepCounter::HybridHybridRepCounterSpec_cxx swiftPart = NitroRepCounter::HybridHybridRepCounterSpec_cxx::fromUnsafe(swiftUnsafePointer);
+    return std::make_shared<margelo::nitro::repcounter::HybridHybridRepCounterSpecSwift>(swiftPart);
+  }
+  void* NON_NULL get_std__shared_ptr_HybridHybridRepCounterSpec_(std__shared_ptr_HybridHybridRepCounterSpec_ cppType) {
+    std::shared_ptr<margelo::nitro::repcounter::HybridHybridRepCounterSpecSwift> swiftWrapper = std::dynamic_pointer_cast<margelo::nitro::repcounter::HybridHybridRepCounterSpecSwift>(cppType);
+    #ifdef NITRO_DEBUG
+    if (swiftWrapper == nullptr) [[unlikely]] {
+      throw std::runtime_error("Class \"HybridHybridRepCounterSpec\" is not implemented in Swift!");
+    }
+    #endif
+    NitroRepCounter::HybridHybridRepCounterSpec_cxx& swiftPart = swiftWrapper->getSwiftPart();
+    return swiftPart.toUnsafe();
+  }
 
 } // namespace margelo::nitro::repcounter::bridge::swift

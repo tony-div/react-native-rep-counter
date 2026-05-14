@@ -1,29 +1,24 @@
-import { type HybridObject, NitroModules } from 'react-native-nitro-modules'
-
-export interface RepCounterConfig {
-  upThresholdDeg?: number
-  downThresholdDeg?: number
-}
-
-export type RepPhase = 'UNKNOWN' | 'UP' | 'DOWN'
+import type { HybridObject } from 'react-native-nitro-modules'
 
 export interface RepCounterState {
+  exercise: string | null
   reps: number
-  phase: RepPhase
+  confidence: number
+  phase: string
+  activeArm: string | null
 }
 
-export interface RepCounter extends HybridObject<{ ios: 'c++', android: 'c++' }> {
-  startSession(config?: RepCounterConfig): void
+export interface RepCounterConfig {
+  exercise?: string | null
+}
+
+export interface HybridRepCounter
+  extends HybridObject<{ ios: 'swift'; android: 'kotlin' }> {
+  startSession(config: RepCounterConfig | null): void
   stopSession(): void
-  ingestLandmarksBuffer(landmarks: Array<number>): void
-  ingestLandmarksBufferWithExercise(
-    landmarks: Array<number>,
-    exercise: string,
-  ): void
-  getRepCount(): number
-  getCurrentPhase(): RepPhase
-  getState(): RepCounterState
+  setExercise(exercise: string | null): void
   resetReps(): void
+  resetAll(): void
+  getState(): RepCounterState
+  update(landmarks: number[], exerciseOverride: string | null): RepCounterState
 }
-
-export const repCounter = NitroModules.createHybridObject<RepCounter>('RepCounter')

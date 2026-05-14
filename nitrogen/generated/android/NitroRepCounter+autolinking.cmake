@@ -33,9 +33,11 @@ target_sources(
   # Autolinking Setup
   ../nitrogen/generated/android/NitroRepCounterOnLoad.cpp
   # Shared Nitrogen C++ sources
-  ../nitrogen/generated/shared/c++/HybridRepCounterSpec.cpp
+  ../nitrogen/generated/shared/c++/HybridHybridRepCounterSpec.cpp
   # Android-specific Nitrogen C++ sources
-  
+  ../nitrogen/generated/android/c++/JHybridHybridRepCounterSpec.cpp
+  ../nitrogen/generated/android/c++/JVariant_NullType_String.cpp
+  ../nitrogen/generated/android/c++/JVariant_NullType_RepCounterConfig.cpp
 )
 
 # From node_modules/react-native/ReactAndroid/cmake-utils/folly-flags.cmake

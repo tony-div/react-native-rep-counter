@@ -8,10 +8,25 @@
 #pragma once
 
 // Forward declarations of C++ defined types
-
+// Forward declaration of `HybridHybridRepCounterSpec` to properly resolve imports.
+namespace margelo::nitro::repcounter { class HybridHybridRepCounterSpec; }
+// Forward declaration of `RepCounterConfig` to properly resolve imports.
+namespace margelo::nitro::repcounter { struct RepCounterConfig; }
+// Forward declaration of `RepCounterState` to properly resolve imports.
+namespace margelo::nitro::repcounter { struct RepCounterState; }
 
 // Include C++ defined types
-
+#include "HybridHybridRepCounterSpec.hpp"
+#include "RepCounterConfig.hpp"
+#include "RepCounterState.hpp"
+#include <NitroModules/Null.hpp>
+#include <NitroModules/Result.hpp>
+#include <exception>
+#include <memory>
+#include <optional>
+#include <string>
+#include <variant>
+#include <vector>
 
 // C++ helpers for Swift
 #include "NitroRepCounter-Swift-Cxx-Bridge.hpp"
@@ -23,7 +38,8 @@
 #include <NitroModules/DateToChronoDate.hpp>
 
 // Forward declarations of Swift defined types
-
+// Forward declaration of `HybridHybridRepCounterSpec_cxx` to properly resolve imports.
+namespace NitroRepCounter { class HybridHybridRepCounterSpec_cxx; }
 
 // Include Swift defined types
 #if __has_include("NitroRepCounter-Swift.h")

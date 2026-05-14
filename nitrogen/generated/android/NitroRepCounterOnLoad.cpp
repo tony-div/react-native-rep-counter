@@ -15,7 +15,7 @@
 #include <fbjni/fbjni.h>
 #include <NitroModules/HybridObjectRegistry.hpp>
 
-#include "HybridRepCounter.hpp"
+#include "JHybridHybridRepCounterSpec.hpp"
 
 namespace margelo::nitro::repcounter {
 
@@ -32,18 +32,10 @@ void registerAllNatives() {
   using namespace margelo::nitro::repcounter;
 
   // Register native JNI methods
-  
+  margelo::nitro::repcounter::JHybridHybridRepCounterSpec::CxxPart::registerNatives();
 
   // Register Nitro Hybrid Objects
-  HybridObjectRegistry::registerHybridObjectConstructor(
-    "RepCounter",
-    []() -> std::shared_ptr<HybridObject> {
-      static_assert(std::is_default_constructible_v<HybridRepCounter>,
-                    "The HybridObject \"HybridRepCounter\" is not default-constructible! "
-                    "Create a public constructor that takes zero arguments to be able to autolink this HybridObject.");
-      return std::make_shared<HybridRepCounter>();
-    }
-  );
+  
 }
 
 } // namespace margelo::nitro::repcounter

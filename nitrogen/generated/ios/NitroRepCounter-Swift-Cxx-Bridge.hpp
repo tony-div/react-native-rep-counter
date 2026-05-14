@@ -8,13 +8,29 @@
 #pragma once
 
 // Forward declarations of C++ defined types
-
+// Forward declaration of `HybridHybridRepCounterSpec` to properly resolve imports.
+namespace margelo::nitro::repcounter { class HybridHybridRepCounterSpec; }
+// Forward declaration of `RepCounterConfig` to properly resolve imports.
+namespace margelo::nitro::repcounter { struct RepCounterConfig; }
+// Forward declaration of `RepCounterState` to properly resolve imports.
+namespace margelo::nitro::repcounter { struct RepCounterState; }
 
 // Forward declarations of Swift defined types
-
+// Forward declaration of `HybridHybridRepCounterSpec_cxx` to properly resolve imports.
+namespace NitroRepCounter { class HybridHybridRepCounterSpec_cxx; }
 
 // Include C++ defined types
-
+#include "HybridHybridRepCounterSpec.hpp"
+#include "RepCounterConfig.hpp"
+#include "RepCounterState.hpp"
+#include <NitroModules/Null.hpp>
+#include <NitroModules/Result.hpp>
+#include <exception>
+#include <memory>
+#include <optional>
+#include <string>
+#include <variant>
+#include <vector>
 
 /**
  * Contains specialized versions of C++ templated types so they can be accessed from Swift,
@@ -22,6 +38,133 @@
  */
 namespace margelo::nitro::repcounter::bridge::swift {
 
+  // pragma MARK: std::variant<nitro::NullType, std::string>
+  /**
+   * Wrapper struct for `std::variant<nitro::NullType, std::string>`.
+   * std::variant cannot be used in Swift because of a Swift bug.
+   * Not even specializing it works. So we create a wrapper struct.
+   */
+  struct std__variant_nitro__NullType__std__string_ final {
+    std::variant<nitro::NullType, std::string> variant;
+    std__variant_nitro__NullType__std__string_(std::variant<nitro::NullType, std::string> variant): variant(variant) { }
+    operator std::variant<nitro::NullType, std::string>() const noexcept {
+      return variant;
+    }
+    inline size_t index() const noexcept {
+      return variant.index();
+    }
+    inline nitro::NullType get_0() const noexcept {
+      return std::get<0>(variant);
+    }
+    inline std::string get_1() const noexcept {
+      return std::get<1>(variant);
+    }
+  };
+  inline std__variant_nitro__NullType__std__string_ create_std__variant_nitro__NullType__std__string_(nitro::NullType value) noexcept {
+    return std__variant_nitro__NullType__std__string_(value);
+  }
+  inline std__variant_nitro__NullType__std__string_ create_std__variant_nitro__NullType__std__string_(const std::string& value) noexcept {
+    return std__variant_nitro__NullType__std__string_(value);
+  }
   
+  // pragma MARK: std::optional<std::variant<nitro::NullType, std::string>>
+  /**
+   * Specialized version of `std::optional<std::variant<nitro::NullType, std::string>>`.
+   */
+  using std__optional_std__variant_nitro__NullType__std__string__ = std::optional<std::variant<nitro::NullType, std::string>>;
+  inline std::optional<std::variant<nitro::NullType, std::string>> create_std__optional_std__variant_nitro__NullType__std__string__(const std::variant<nitro::NullType, std::string>& value) noexcept {
+    return std::optional<std::variant<nitro::NullType, std::string>>(value);
+  }
+  inline bool has_value_std__optional_std__variant_nitro__NullType__std__string__(const std::optional<std::variant<nitro::NullType, std::string>>& optional) noexcept {
+    return optional.has_value();
+  }
+  inline std::variant<nitro::NullType, std::string> get_std__optional_std__variant_nitro__NullType__std__string__(const std::optional<std::variant<nitro::NullType, std::string>>& optional) noexcept {
+    return optional.value();
+  }
+  
+  // pragma MARK: std::variant<nitro::NullType, RepCounterConfig>
+  /**
+   * Wrapper struct for `std::variant<nitro::NullType, RepCounterConfig>`.
+   * std::variant cannot be used in Swift because of a Swift bug.
+   * Not even specializing it works. So we create a wrapper struct.
+   */
+  struct std__variant_nitro__NullType__RepCounterConfig_ final {
+    std::variant<nitro::NullType, RepCounterConfig> variant;
+    std__variant_nitro__NullType__RepCounterConfig_(std::variant<nitro::NullType, RepCounterConfig> variant): variant(variant) { }
+    operator std::variant<nitro::NullType, RepCounterConfig>() const noexcept {
+      return variant;
+    }
+    inline size_t index() const noexcept {
+      return variant.index();
+    }
+    inline nitro::NullType get_0() const noexcept {
+      return std::get<0>(variant);
+    }
+    inline RepCounterConfig get_1() const noexcept {
+      return std::get<1>(variant);
+    }
+  };
+  inline std__variant_nitro__NullType__RepCounterConfig_ create_std__variant_nitro__NullType__RepCounterConfig_(nitro::NullType value) noexcept {
+    return std__variant_nitro__NullType__RepCounterConfig_(value);
+  }
+  inline std__variant_nitro__NullType__RepCounterConfig_ create_std__variant_nitro__NullType__RepCounterConfig_(const RepCounterConfig& value) noexcept {
+    return std__variant_nitro__NullType__RepCounterConfig_(value);
+  }
+  
+  // pragma MARK: std::optional<std::variant<nitro::NullType, RepCounterConfig>>
+  /**
+   * Specialized version of `std::optional<std::variant<nitro::NullType, RepCounterConfig>>`.
+   */
+  using std__optional_std__variant_nitro__NullType__RepCounterConfig__ = std::optional<std::variant<nitro::NullType, RepCounterConfig>>;
+  inline std::optional<std::variant<nitro::NullType, RepCounterConfig>> create_std__optional_std__variant_nitro__NullType__RepCounterConfig__(const std::variant<nitro::NullType, RepCounterConfig>& value) noexcept {
+    return std::optional<std::variant<nitro::NullType, RepCounterConfig>>(value);
+  }
+  inline bool has_value_std__optional_std__variant_nitro__NullType__RepCounterConfig__(const std::optional<std::variant<nitro::NullType, RepCounterConfig>>& optional) noexcept {
+    return optional.has_value();
+  }
+  inline std::variant<nitro::NullType, RepCounterConfig> get_std__optional_std__variant_nitro__NullType__RepCounterConfig__(const std::optional<std::variant<nitro::NullType, RepCounterConfig>>& optional) noexcept {
+    return optional.value();
+  }
+  
+  // pragma MARK: std::vector<double>
+  /**
+   * Specialized version of `std::vector<double>`.
+   */
+  using std__vector_double_ = std::vector<double>;
+  inline std::vector<double> create_std__vector_double_(size_t size) noexcept {
+    std::vector<double> vector;
+    vector.reserve(size);
+    return vector;
+  }
+  
+  // pragma MARK: std::shared_ptr<HybridHybridRepCounterSpec>
+  /**
+   * Specialized version of `std::shared_ptr<HybridHybridRepCounterSpec>`.
+   */
+  using std__shared_ptr_HybridHybridRepCounterSpec_ = std::shared_ptr<HybridHybridRepCounterSpec>;
+  std::shared_ptr<HybridHybridRepCounterSpec> create_std__shared_ptr_HybridHybridRepCounterSpec_(void* NON_NULL swiftUnsafePointer) noexcept;
+  void* NON_NULL get_std__shared_ptr_HybridHybridRepCounterSpec_(std__shared_ptr_HybridHybridRepCounterSpec_ cppType);
+  
+  // pragma MARK: std::weak_ptr<HybridHybridRepCounterSpec>
+  using std__weak_ptr_HybridHybridRepCounterSpec_ = std::weak_ptr<HybridHybridRepCounterSpec>;
+  inline std__weak_ptr_HybridHybridRepCounterSpec_ weakify_std__shared_ptr_HybridHybridRepCounterSpec_(const std::shared_ptr<HybridHybridRepCounterSpec>& strong) noexcept { return strong; }
+  
+  // pragma MARK: Result<void>
+  using Result_void_ = Result<void>;
+  inline Result_void_ create_Result_void_() noexcept {
+    return Result<void>::withValue();
+  }
+  inline Result_void_ create_Result_void_(const std::exception_ptr& error) noexcept {
+    return Result<void>::withError(error);
+  }
+  
+  // pragma MARK: Result<RepCounterState>
+  using Result_RepCounterState_ = Result<RepCounterState>;
+  inline Result_RepCounterState_ create_Result_RepCounterState_(const RepCounterState& value) noexcept {
+    return Result<RepCounterState>::withValue(value);
+  }
+  inline Result_RepCounterState_ create_Result_RepCounterState_(const std::exception_ptr& error) noexcept {
+    return Result<RepCounterState>::withError(error);
+  }
 
 } // namespace margelo::nitro::repcounter::bridge::swift

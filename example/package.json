@@ -13,7 +13,7 @@
     "@react-native/new-app-screen": "0.85.1",
     "react": "19.2.3",
     "react-native": "0.85.1",
-    "react-native-exercise-recognition": "github:tony-div/react-native-exercise-recognition#v1.3.0",
+    "react-native-exercise-recognition": "github:tony-div/react-native-exercise-recognition",
     "react-native-nitro-modules": "0.35.4",
     "react-native-pose-landmarks": "github:tony-div/react-native-pose-landmarks#v1.2.0",
     "react-native-rep-counter": "file:..",

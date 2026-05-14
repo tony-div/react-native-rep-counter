@@ -1,6 +1,8 @@
 export {
-  repCounter,
-  type RepCounter,
+  createRepCounter,
+  type Landmark,
+  type LandmarksInput,
   type RepCounterConfig,
   type RepCounterState,
-} from './specs/RepCounter.nitro'
+  type RepPhase,
+} from './repCounter'

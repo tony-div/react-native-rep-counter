@@ -28,10 +28,12 @@
 #error NitroModules cannot be found! Are you sure you installed NitroModules properly?
 #endif
 
-// Forward declaration of `RepPhase` to properly resolve imports.
-namespace margelo::nitro::repcounter { enum class RepPhase; }
 
-#include "RepPhase.hpp"
+
+#include <NitroModules/Null.hpp>
+#include <string>
+#include <variant>
+#include <optional>
 
 namespace margelo::nitro::repcounter {
 
@@ -40,12 +42,15 @@ namespace margelo::nitro::repcounter {
    */
   struct RepCounterState final {
   public:
+    std::optional<std::variant<nitro::NullType, std::string>> exercise     SWIFT_PRIVATE;
     double reps     SWIFT_PRIVATE;
-    RepPhase phase     SWIFT_PRIVATE;
+    double confidence     SWIFT_PRIVATE;
+    std::string phase     SWIFT_PRIVATE;
+    std::optional<std::variant<nitro::NullType, std::string>> activeArm     SWIFT_PRIVATE;
 
   public:
     RepCounterState() = default;
-    explicit RepCounterState(double reps, RepPhase phase): reps(reps), phase(phase) {}
+    explicit RepCounterState(std::optional<std::variant<nitro::NullType, std::string>> exercise, double reps, double confidence, std::string phase, std::optional<std::variant<nitro::NullType, std::string>> activeArm): exercise(exercise), reps(reps), confidence(confidence), phase(phase), activeArm(activeArm) {}
 
   public:
     friend bool operator==(const RepCounterState& lhs, const RepCounterState& rhs) = default;
@@ -61,14 +66,20 @@ namespace margelo::nitro {
     static inline margelo::nitro::repcounter::RepCounterState fromJSI(jsi::Runtime& runtime, const jsi::Value& arg) {
       jsi::Object obj = arg.asObject(runtime);
       return margelo::nitro::repcounter::RepCounterState(
+        JSIConverter<std::optional<std::variant<nitro::NullType, std::string>>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "exercise"))),
         JSIConverter<double>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "reps"))),
-        JSIConverter<margelo::nitro::repcounter::RepPhase>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "phase")))
+        JSIConverter<double>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "confidence"))),
+        JSIConverter<std::string>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "phase"))),
+        JSIConverter<std::optional<std::variant<nitro::NullType, std::string>>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "activeArm")))
       );
     }
     static inline jsi::Value toJSI(jsi::Runtime& runtime, const margelo::nitro::repcounter::RepCounterState& arg) {
       jsi::Object obj(runtime);
+      obj.setProperty(runtime, PropNameIDCache::get(runtime, "exercise"), JSIConverter<std::optional<std::variant<nitro::NullType, std::string>>>::toJSI(runtime, arg.exercise));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "reps"), JSIConverter<double>::toJSI(runtime, arg.reps));
-      obj.setProperty(runtime, PropNameIDCache::get(runtime, "phase"), JSIConverter<margelo::nitro::repcounter::RepPhase>::toJSI(runtime, arg.phase));
+      obj.setProperty(runtime, PropNameIDCache::get(runtime, "confidence"), JSIConverter<double>::toJSI(runtime, arg.confidence));
+      obj.setProperty(runtime, PropNameIDCache::get(runtime, "phase"), JSIConverter<std::string>::toJSI(runtime, arg.phase));
+      obj.setProperty(runtime, PropNameIDCache::get(runtime, "activeArm"), JSIConverter<std::optional<std::variant<nitro::NullType, std::string>>>::toJSI(runtime, arg.activeArm));
       return obj;
     }
     static inline bool canConvert(jsi::Runtime& runtime, const jsi::Value& value) {
@@ -79,8 +90,11 @@ namespace margelo::nitro {
       if (!nitro::isPlainObject(runtime, obj)) {
         return false;
       }
+      if (!JSIConverter<std::optional<std::variant<nitro::NullType, std::string>>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "exercise")))) return false;
       if (!JSIConverter<double>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "reps")))) return false;
-      if (!JSIConverter<margelo::nitro::repcounter::RepPhase>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "phase")))) return false;
+      if (!JSIConverter<double>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "confidence")))) return false;
+      if (!JSIConverter<std::string>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "phase")))) return false;
+      if (!JSIConverter<std::optional<std::variant<nitro::NullType, std::string>>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "activeArm")))) return false;
       return true;
     }
   };
