@@ -1,8 +1,6 @@
 # react-native-rep-counter
 
-React Native TypeScript rep counting logic from pose landmarks.
-
-The library ports the logic from `ai/Rep Counting/rep_counter_interface.py` into TypeScript and runs it off the UI thread via a lightweight worker queue. Provide pose landmarks (33 points, x/y/z/visibility) and an exercise label; the rep counter returns `{ exercise, reps, confidence, phase }`.
+React Native rep counting from pose landmarks using a native (Kotlin/Swift) rep counter, exposed via Nitro Modules with a thin TypeScript wrapper. Provide pose landmarks (33 points, x/y/z/visibility) and an exercise label; the rep counter returns `{ exercise, reps, confidence, phase }`.
 
 ## Install
 
@@ -44,8 +42,6 @@ console.log(state.reps, state.phase)
 npm install
 npm run specs
 ```
-
-No native build steps.
 
 ## Example app with reps HUD
 
